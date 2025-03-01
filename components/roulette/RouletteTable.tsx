@@ -10,12 +10,19 @@ import BetAmountSelector from "./BetAmountSelector";
 import { motion } from "framer-motion";
 import ChipStack from "./ChipStack";
 
+const fetchBalance = async () => {
+  const response = await fetch("/api/balance");
+  const data = await response.json();
+  console.log("data", data);
+  return data.balance;
+}
+
 export default function RouletteTable() {
   const [selectedNumber, setSelectedNumber] = useState<number | null>(null);
   const [betType, setBetType] = useState<BetType | null>(null);
   const [betValue, setBetValue] = useState<string | null>(null);
   const [betAmount, setBetAmount] = useState<number>(10);
-  const [balance, setBalance] = useState(1000);
+  const [balance, setBalance] = useState(0);
   const [result, setResult] = useState<GameResult | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
@@ -24,13 +31,16 @@ export default function RouletteTable() {
 
   console.log("status", status);
   useEffect(() => {
-    if (status === "loading") return; // Prevent errors when session is still loading
-    console.log("user", session?.user);
+    if (status === "loading") return;
+
     if(!session?.user) {
       window.location.href = "/api/auth/signin";
     }
-
   }, [session, status]);
+
+  useEffect(() => {
+    fetchBalance().then(setBalance);
+  }, []);
   
 
   // Simulate updating balance based on win/loss
@@ -94,7 +104,7 @@ export default function RouletteTable() {
           setIsSpinning(false);
           alert(error instanceof Error ? error.message : "Bet failed");
         }
-      }, 100); // animation
+      }, 5500); // animation
     } catch (error) {
       setIsSpinning(false);
       alert(error instanceof Error ? error.message : "Bet failed");
@@ -174,7 +184,7 @@ export default function RouletteTable() {
                 selectedNumber={selectedNumber}
                 onNumberClick={handleNumberClick}
                 isSpinning={isSpinning}
-                result={result?.result}
+                result={result?.result || null}
               />
             </motion.div>
           </div>
