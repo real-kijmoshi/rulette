@@ -12,7 +12,7 @@ export default function Header({ balance, username }: HeaderProps) {
     <header className="bg-slate-900/90 shadow-xl backdrop-blur-sm sticky top-0 z-10">
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-          <motion.h1 
+          <motion.h1
             className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500"
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}

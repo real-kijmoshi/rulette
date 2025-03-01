@@ -26,6 +26,10 @@ export default function RouletteTable() {
   useEffect(() => {
     if (status === "loading") return; // Prevent errors when session is still loading
     console.log("user", session?.user);
+    if(!session?.user) {
+      window.location.href = "/api/auth/signin";
+    }
+
   }, [session, status]);
   
 

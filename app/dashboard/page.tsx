@@ -1,21 +1,15 @@
-// src/app/roulette/page.tsx
 "use client";
+import { SessionProvider } from 'next-auth/react';
+import RouletteTable from '@/components/roulette/RouletteTable';
 
-import React from "react";
-import { SessionProvider } from "next-auth/react";
-import RouletteTable from "@/components/roulette/RouletteTable";
-
-
-
-
-export default function RoulettePage() {
-  return (
-    <>
-        <SessionProvider>
-          <div className="bg-slate-900 min-h-screen">
-            <RouletteTable />
-          </div>
-        </SessionProvider>
-    </>
-  );
+export default function page() {
+    return (
+        <div>
+        <main className="container mx-auto px-4 py-8">
+            <SessionProvider>
+                <RouletteTable />
+            </SessionProvider>
+        </main>
+        </div>
+    )
 }
