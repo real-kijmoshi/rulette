@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaUser, FaCoins, FaSignOutAlt } from "react-icons/fa";
+import { signOut } from "next-auth/react";
 
 interface HeaderProps {
   balance: number;
@@ -43,8 +44,7 @@ export default function Header({ balance, username }: HeaderProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                // Logout user
-                window.location.href = '/api/auth/signout';
+                signOut({ callbackUrl: "/" });
               }}
             >
               <FaSignOutAlt />
