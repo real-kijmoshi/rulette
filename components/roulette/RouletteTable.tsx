@@ -104,7 +104,7 @@ export default function RouletteTable() {
           setIsSpinning(false);
           alert(error instanceof Error ? error.message : "Bet failed");
         }
-      }, 5500); // animation
+      }, 2500); // animation
     } catch (error) {
       setIsSpinning(false);
       alert(error instanceof Error ? error.message : "Bet failed");
@@ -125,9 +125,6 @@ export default function RouletteTable() {
 
   const closeModal = () => {
     setShowModal(false);
-    setSelectedNumber(null);
-    setBetType(null);
-    setBetValue(null);
     setResult(null);
   };
 

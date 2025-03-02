@@ -76,10 +76,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check user balance
-    const user = await User.findOne({ 
-      "auth.provider": "discord", 
-      "auth.providerId": session.user.id 
+    // Check user balance by id of user
+    const user = await User.findOne({
+      "_id": session.user.id
     });
 
     if (!user) {

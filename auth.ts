@@ -13,6 +13,7 @@ export const authOptions = {
       if (token.id) {
         try {
           // Add await and use exec() to properly execute the query
+          console.log("token, ", token);
           const user = await User.findOne({ "auth.provider": "discord", "auth.providerId": token.id }).lean();
           
           if (!user) {
@@ -22,11 +23,10 @@ export const authOptions = {
           
           // Add necessary user data to the session
           session.user = {
-            id: token.id,
+            id: user._id,
             name: session.user?.name,
             image: session.user?.image,
             balance: user.balance,
-            // Add any other user properties you need
           };
         } catch (error) {
           console.error("Error fetching user:", error);
@@ -50,8 +50,23 @@ export const authOptions = {
         token.id = profile.id;
       }
       return token;
+    },
+    async signIn({account, profile}) {
+      const userExists = await User.findOne({ "auth.provider": account.provider, "auth.providerId": profile.id });
+      if (!userExists) {
+        await User.create({
+          auth: {
+            provider: account.provider,
+            providerId: profile.id,
+          },
+          balance: 1000,
+          email: profile.email,
+          name: profile.username,
+        });
+      }
+      return true;
     }
-  }
+  },
 }
 
 const authProvider = NextAuth(authOptions);

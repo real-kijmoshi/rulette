@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/auth';
 import { User } from '@/db';
 
-export async function GET(req) {
+export async function GET() {
     try {
         const session = await getServerSession(authOptions);
 
@@ -13,8 +13,7 @@ export async function GET(req) {
 
         // Use the ID from the session to find the user
         const user = await User.findOne({ 
-            "auth.provider": "discord", 
-            "auth.providerId": session.user.id 
+            "_id": session.user.id
         }).lean();
         
         if (!user) {

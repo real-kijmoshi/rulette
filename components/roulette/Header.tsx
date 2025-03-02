@@ -27,7 +27,7 @@ export default function Header({ balance, username }: HeaderProps) {
               whileHover={{ scale: 1.05 }}
             >
               <FaCoins className="text-amber-400" />
-              <span className="font-bold">${balance.toLocaleString()}</span>
+              <span className="font-bold">${(balance||0).toLocaleString()}</span>
             </motion.div>
             
             <motion.div 
@@ -42,7 +42,10 @@ export default function Header({ balance, username }: HeaderProps) {
               className="flex items-center gap-2 bg-red-600/80 px-4 py-2 rounded-full font-semibold hover:bg-red-500 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => alert("Not implemented yet")}
+              onClick={() => {
+                // Logout user
+                window.location.href = '/api/auth/signout';
+              }}
             >
               <FaSignOutAlt />
               <span className="hidden md:inline">Logout</span>

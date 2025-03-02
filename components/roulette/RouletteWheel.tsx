@@ -14,7 +14,7 @@ export default function RouletteWheel({ selectedNumber, onNumberClick, isSpinnin
   const spinIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const spinSpeedRef = useRef<number>(100); // Initial speed in ms
   const spinningTimeRef = useRef<number>(0);
-  const maxSpinningTime = 5000; // 5 seconds total spinning time
+  const maxSpinningTime = 2000; // Max time in ms
 
   // Function to get a random number between 0-36
   const getRandomNumber = () => Math.floor(Math.random() * 37);

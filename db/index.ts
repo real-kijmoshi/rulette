@@ -3,6 +3,14 @@ import mongoose from 'mongoose';
 // Connect to the database
 mongoose.connect((process.env.MONGODB_URI as string));
 
+mongoose.connection.on('error', (error) => {
+    console.error("Database connection error:", error);
+});
+
+mongoose.connection.once('open', () => {
+    console.log("Database connected");
+});
+
 const userSchema = new mongoose.Schema({
     auth: {
         provider: String,
