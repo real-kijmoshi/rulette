@@ -146,7 +146,9 @@ export async function POST(req: Request) {
     // Calculate winnings and update balance if won
     let winAmount = 0;
     if (win) {
-      winAmount = betAmount * (PAYOUT_RATIOS[betType] + 1);
+
+
+      winAmount = betAmount * (PAYOUT_RATIOS[betType as keyof typeof PAYOUT_RATIOS] + 1);
       user.balance += winAmount;
       await user.save();
     }
