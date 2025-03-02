@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
+import { getServerSession, NextAuthOptions } from 'next-auth';
 import { authOptions } from '@/auth';
 import { User } from '@/db';
 
@@ -25,7 +25,7 @@ const PAYOUT_RATIOS = {
 export async function POST(req: Request) {
   try {
     // Check authentication
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions as unknown as NextAuthOptions);
     if (!session || !session.user) {
       return NextResponse.json(
         { error: 'Unauthorized' }, 
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
 
     // Check user balance by id of user
     const user = await User.findOne({
-      "_id": session.user.id
+      "_id": (session.user as { id: string }).id
     });
 
     if (!user) {

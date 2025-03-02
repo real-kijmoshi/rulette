@@ -3,6 +3,8 @@ import { BetType } from "./types";
 import BetButton from "./BetButton";
 import { motion } from "framer-motion";
 import { FaPlay, FaSpinner } from "react-icons/fa";
+import ColumnBetSelector from "./ColumnBetSelector";
+import DozensBetSelector from "./DozensBetSelector";
 
 interface BetControlsProps {
   betType: BetType | null;
