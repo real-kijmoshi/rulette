@@ -81,30 +81,32 @@ export default function RouletteTable() {
     
     try {
       // Simulate API call with timeout for wheel animation
-      setTimeout(async () => {
-        try {
-          const response = await fetch("/api/bet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              number: betType === 'straight' ? selectedNumber : null,
-              betType,
-              betValue,
-              betAmount
-            })
-          });
+      try {
+        const response = await fetch("/api/bet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            number: betType === 'straight' ? selectedNumber : null,
+            betType,
+            betValue,
+            betAmount
+          })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error);
+
+        setResult(data);
+
+        setTimeout(async () => {
   
-          const data = await response.json();
-          if (!response.ok) throw new Error(data.error);
-  
-          setResult(data);
-          setIsSpinning(false);
           setShowModal(true);
-        } catch (error) {
           setIsSpinning(false);
-          alert(error instanceof Error ? error.message : "Bet failed");
-        }
-      }, 2500); // animation
+        }, 2500); // animation
+      } catch (error) {
+        setIsSpinning(false);
+        alert(error instanceof Error ? error.message : "Bet failed");
+      }
     } catch (error) {
       setIsSpinning(false);
       alert(error instanceof Error ? error.message : "Bet failed");
