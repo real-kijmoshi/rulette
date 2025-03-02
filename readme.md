@@ -9,14 +9,10 @@ Spin the wheel, test your luck, and compete with players worldwide in this inter
 ## ✨ Features
 
 ✅ **Realistic Gameplay** – Enjoy an immersive roulette experience with true-to-life physics.  
-🌐 **Real-time Multiplayer** – Play with friends or challenge opponents worldwide!  
-💬 **Live Chat** – Interact with other players while you spin.  
 🏆 **Global Leaderboard & Achievements** – Climb the ranks and showcase your skills.  
 📱 **Fully Responsive** – Play seamlessly on any device.  
 🔐 **Secure Authentication** – NextAuth.js-powered login system.  
 💰 **Virtual Currency & Bonuses** – Get daily rewards and keep the fun going!  
-🌙 **Dark/Light Mode** – Switch between themes effortlessly.  
-🎵 **Immersive Sound Effects** – Enhance your gaming experience.
 
 ---
 
